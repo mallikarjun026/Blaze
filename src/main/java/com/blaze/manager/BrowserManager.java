@@ -40,11 +40,17 @@ public class BrowserManager {
             options.addArguments("--disable-browser-side-navigation");
             options.setAcceptInsecureCerts(true);
             options.setExperimentalOption("useAutomationExtension",false);
-
+            System.setProperty("webdriver.chrome.driver", ".//driver//chromedriver.exe");
             driver= new ChromeDriver(options);
             driver.manage().window().maximize();
 
         }
 
+    }
+
+    public synchronized  void closeBrowser()
+    {
+        if(BrowserManager.getInstance().getDriver()!=null)
+            BrowserManager.getInstance().getDriver().quit();
     }
 }

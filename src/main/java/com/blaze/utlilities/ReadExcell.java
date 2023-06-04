@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -16,9 +17,15 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ReadExcell {
 
+	private static String dataSheetpath=null;
+
+	public static void setDataSheetPath(String path){
+		dataSheetpath=path;
+	}
 	public static Row returnRowOfCell(String cellData) {
 		try {
-			FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "\\DataFiles\\TestData.xlsx");
+			//FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "\\DataFiles\\TestData.xlsx");
+			FileInputStream fis = new FileInputStream(dataSheetpath);
 			BufferedInputStream bis = new BufferedInputStream(fis);
 			String dataSheet = "DataSheet1";
 			Workbook wb = new XSSFWorkbook(bis);
@@ -83,6 +90,17 @@ public class ReadExcell {
 		
 		return testdata;
 		
+	}
+
+	public static Map<String,String> returnTestDataMap(String columnName,String rowName)
+	{
+		Row row1 = returnRowOfCell("Testcases");
+		Row row2 = returnRowOfCell("Login");
+		printRowData(row1);
+		printRowData(row2);
+
+		HashMap<String, String> testdata1= returnTestData(row1, row2);
+		return testdata1;
 	}
 	
 
