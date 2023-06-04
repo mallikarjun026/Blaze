@@ -94,8 +94,8 @@ public class ReadExcell {
 
 	public static Map<String,String> returnTestDataMap(String columnName,String rowName)
 	{
-		Row row1 = returnRowOfCell("Testcases");
-		Row row2 = returnRowOfCell("Login");
+		Row row1 = returnRowOfCell(columnName);
+		Row row2 = returnRowOfCell(rowName);
 		printRowData(row1);
 		printRowData(row2);
 

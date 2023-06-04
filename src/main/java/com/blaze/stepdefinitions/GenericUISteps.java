@@ -20,6 +20,7 @@ public class GenericUISteps extends Helper {
     }
     @Given("user launches url {string} on browser {string}")
     public void user_launches_url_on_browser(String url,String browser) {
+
         BrowserManager.getInstance().initializeWebdriver(browser);
         BrowserManager.getInstance().getDriver().get(url);
 

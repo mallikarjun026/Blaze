@@ -5,7 +5,7 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions( features = {"src/test/resources/features/sample.feature"},
         glue = {"com.blaze"},
-        dryRun = true,
+        dryRun = false,
         tags = "@demo",
         plugin = { "pretty", "json:target/cucumber/Cucumber.json",
                 "junit:target/cucumber/Cucumber.xml",
