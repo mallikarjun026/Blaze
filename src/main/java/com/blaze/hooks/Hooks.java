@@ -26,14 +26,14 @@ public class Hooks {
         String temp=null;
         for(String singletag:tags)
         {
-            if(singletag.startsWith("@Test_Id")){
-                temp=singletag.split("@Test_Id")[1];
+            if(singletag.startsWith("@Test_Id_")){
+                temp=singletag.split("@Test_Id_")[1];
                 sd.setTestID(temp);
             }
         }
 
         System.out.println("Test id : "+sd.getTestID());
-        sd.setScenarioData(ReadExcell.returnTestDataMap("TEST_ID",sd.getTestID()));
+        sd.setScenarioData(ReadExcell.returnTestDataMap("TestCase",sd.getTestID()));
 
     }
 
