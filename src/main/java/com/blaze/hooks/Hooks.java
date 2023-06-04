@@ -1,5 +1,6 @@
 package com.blaze.hooks;
 
+import com.blaze.manager.BrowserManager;
 import com.blaze.scenario.ScenarioDetails;
 import com.blaze.utlilities.ReadExcell;
 import io.cucumber.java.After;
@@ -13,12 +14,7 @@ public class Hooks {
 
     @Before
     public void beforeScenario(Scenario scenario){
-        System.out.printf("this will execute before every scenario");
-    }
-
-    @After
-    public void afterScenario(Scenario scenario){
-        System.out.printf("this will execute after every scenario");
+        System.out.println("this will execute before every scenario");
         System.out.println("scenario currently executing : "+scenario.getName());
         Collection<String> tags= scenario.getSourceTagNames();
         sd=ScenarioDetails.getScenarioDetailsInstance();
@@ -33,7 +29,12 @@ public class Hooks {
         }
 
         System.out.println("Test id : "+sd.getTestID());
-        sd.setScenarioData(ReadExcell.returnTestDataMap("TestCase",sd.getTestID()));
+
+    }
+
+    @After
+    public void afterScenario(Scenario scenario){
+        BrowserManager.getInstance().getDriver().close();
 
     }
 

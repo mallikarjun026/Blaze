@@ -25,7 +25,7 @@ public class BrowserManager {
     }
 
     public synchronized void initializeWebdriver(String browserName){
-        WebDriver driver=null;
+
         browserType=browserName;
         /*if(this.browserType.equalsIgnoreCase("chrome"))
         {

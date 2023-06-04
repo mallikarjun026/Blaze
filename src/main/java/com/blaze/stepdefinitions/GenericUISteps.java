@@ -1,15 +1,13 @@
 package com.blaze.stepdefinitions;
 
-import com.blaze.Helper;
 import com.blaze.manager.BrowserManager;
 import com.blaze.scenario.ScenarioDetails;
 import com.blaze.utlilities.ReadExcell;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-
-import java.util.Map;
 
 public class GenericUISteps extends Helper {
     ScenarioDetails sd=null;
@@ -17,28 +15,45 @@ public class GenericUISteps extends Helper {
     @Given("user loads data {string}")
     public void user_loads_data(String dataSheetPath) {
         ReadExcell.setDataSheetPath(dataSheetPath);
+        sd=ScenarioDetails.getScenarioDetailsInstance();
+        sd.setScenarioData(ReadExcell.returnTestDataMap("TestCase",sd.getTestID()));
     }
     @Given("user launches url {string} on browser {string}")
     public void user_launches_url_on_browser(String url,String browser) {
 
         BrowserManager.getInstance().initializeWebdriver(browser);
-        BrowserManager.getInstance().getDriver().get(url);
+        WebDriver driver=BrowserManager.getInstance().getDriver();
+        if(driver==null)
+        {
+            System.out.println("driver is null");
+        }
+        else {
+            System.out.println("driver is not null");
+        }
+        driver.get(url);
 
 
     }
     @When("users enters text {string} using locator type {string} and value {string}")
     public void users_enters_text_using_locator_type_and_value(String value, String locatorType, String attributeValue) {
         try {
-            sd= ScenarioDetails.getScenarioDetailsInstance();
-            Map<String, String> data=sd.getScenarioData();
-            if(value.startsWith("#")) {
-                value = data.get(value);
-            }
+            value=returnDataForCurrentScenario(value);
             WebElement element=returnWebElement(locatorType,attributeValue);
             element.sendKeys(value);
         } catch (Exception e) {
             Assert.fail("some exception occurred "+e.getMessage());
         }
 
+    }
+
+    @When("user waits for {string} seconds")
+    public void user_waits_for_seconds(String string) {
+        int intvalue= Integer.parseInt(string);
+        System.out.println("waiting for "+intvalue +" seconds..");
+        try {
+            Thread.sleep(intvalue*1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
