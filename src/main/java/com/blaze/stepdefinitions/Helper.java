@@ -40,7 +40,7 @@ public class Helper {
         sd= ScenarioDetails.getScenarioDetailsInstance();
         Map<String, String> data=sd.getScenarioData();
         if(columnName.startsWith("#")) {
-            columnName = data.get(columnName);
+            columnName = data.get(columnName.substring(1));
         }
         return columnName;
 

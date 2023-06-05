@@ -7,4 +7,4 @@ Feature: Login to HRM Application
 Scenario: Login with valid credentials
 
     When users enters text "#DataOne" using locator type "name" and value "firstname"
-    And user waits for "" seconds
+    And user waits for "20" seconds

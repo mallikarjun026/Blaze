@@ -4,13 +4,30 @@ import com.blaze.manager.BrowserManager;
 import com.blaze.scenario.ScenarioDetails;
 import com.blaze.utlilities.ReadExcell;
 import io.cucumber.java.After;
+import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 
 public class Hooks {
     ScenarioDetails sd=null;
+
+    @AfterStep
+    public void addScreenshot(Scenario scenario) throws IOException {
+        WebDriver driver = BrowserManager.getInstance().getDriver();
+        if (driver != null){
+            File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        byte[] fileContent = FileUtils.readFileToByteArray(screenshot);
+        scenario.attach(fileContent, "image/png", "screenshot");
+        }
+    }
 
     @Before
     public void beforeScenario(Scenario scenario){
