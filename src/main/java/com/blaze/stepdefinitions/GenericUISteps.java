@@ -39,6 +39,8 @@ public class GenericUISteps extends Helper {
         try {
             value=returnDataForCurrentScenario(value);
             WebElement element=returnWebElement(locatorType,attributeValue);
+            element.clear();
+
             element.sendKeys(value);
         } catch (Exception e) {
             Assert.fail("some exception occurred "+e.getMessage());
@@ -54,6 +56,16 @@ public class GenericUISteps extends Helper {
             Thread.sleep(intvalue*1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    @When("user clicks on element using locator type {string} and value {string}")
+    public void user_clicks_on_element_using_locator_type_and_value(String locatorType, String attributeValue) {
+        try {
+            WebElement element=returnWebElement(locatorType,attributeValue);
+            element.click();
+        } catch (Exception e) {
+            Assert.fail("some exception occurred "+e.getMessage());
         }
     }
 }

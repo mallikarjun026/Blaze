@@ -7,4 +7,6 @@ Feature: Login to HRM Application
 Scenario: Login with valid credentials
 
     When users enters text "#DataOne" using locator type "name" and value "firstname"
-    And user waits for "20" seconds
+    When users enters text "#DataTwo" using locator type "name" and value "lastname"
+    And user clicks on element using locator type "xpath" and value ".//input[@type='radio' and @value='Male']"
+    And user waits for "10" seconds
