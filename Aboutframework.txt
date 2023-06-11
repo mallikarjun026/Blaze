@@ -1,0 +1,3 @@
+this is
+BDD java selenium framework
+reporting : currently using cucumber default reporting with images enabled with @AfterTest hooks
