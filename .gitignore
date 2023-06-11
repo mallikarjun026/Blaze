@@ -3,6 +3,9 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+#Reports
+Reports/
+
 ### exe #####
 driver/*.exe
 *.exe
