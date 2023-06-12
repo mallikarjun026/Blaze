@@ -1,5 +1,8 @@
 package com.blaze.stepdefinitions;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter;
+import com.aventstack.extentreports.reporter.ExtentReporter;
 import com.blaze.manager.BrowserManager;
 import com.blaze.scenario.ScenarioDetails;
 import com.blaze.utlilities.ReadExcell;
@@ -45,7 +48,7 @@ public class GenericUISteps extends Helper {
         } catch (Exception e) {
             Assert.fail("some exception occurred "+e.getMessage());
         }
-
+        ExtentCucumberAdapter.addTestStepLog("TEXT ENTERED : "+ value);
     }
 
     @When("user waits for {string} seconds")

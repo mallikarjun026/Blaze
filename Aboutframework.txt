@@ -7,3 +7,7 @@
 this is
 BDD java selenium framework
 reporting : currently using cucumber default reporting with images enabled with @AfterTest hooks
+to disable images  pass  :-DDISABLE_SCREENSHOT="true"  in vm arguements
+
+Note: for spark extent reports
+ExtentCucumberAdapter.addTestStepLog(value); is used to write custom text into gherkin step

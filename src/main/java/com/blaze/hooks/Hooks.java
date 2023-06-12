@@ -19,14 +19,20 @@ import java.util.Collection;
 public class Hooks {
     ScenarioDetails sd=null;
 
+
     @AfterStep
     public void addScreenshot(Scenario scenario) throws IOException {
-        WebDriver driver = BrowserManager.getInstance().getDriver();
-        if (driver != null){
-            File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        byte[] fileContent = FileUtils.readFileToByteArray(screenshot);
-        scenario.attach(fileContent, "image/png", "screenshot");
-        }
+
+         String disableScreenShot= System.getProperty("DISABLE_SCREENSHOT","false");
+        if(disableScreenShot.equalsIgnoreCase("false")) {
+                WebDriver driver = BrowserManager.getInstance().getDriver();
+                if (driver != null) {
+                    File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+                    byte[] fileContent = FileUtils.readFileToByteArray(screenshot);
+                    scenario.attach(fileContent, "image/png", "screenshot");
+                }
+            }//if ends
+
     }
 
     @Before
